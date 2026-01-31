@@ -51,6 +51,17 @@ async def _current_branch(cwd: Path) -> str | None:
     return out.strip() if code == 0 and out.strip() else None
 
 
+async def _remote_url(cwd: Path) -> str | None:
+    """Get origin URL (e.g. https://github.com/A-ES/demo123.git)."""
+    code, out, _ = await _run_git(cwd, "remote", "get-url", "origin")
+    if code != 0 or not out.strip():
+        return None
+    url = out.strip()
+    if url.endswith(".git"):
+        url = url[:-4]
+    return url
+
+
 async def run_after_agent(
     config: Config,
     user_message: str,
@@ -113,6 +124,10 @@ async def run_after_agent(
             print(f"github automation: push failed: {err or out}", file=sys.stderr)
             return
         print(f"github automation: pushed to origin/{branch}")
+        remote_url = await _remote_url(cwd)
+        if remote_url:
+            print(f"github automation: view branch: {remote_url}/tree/{branch}")
+        print("github automation: (commit is on branch 'agent-updates', not main—switch branch on GitHub to see it)")
 
     if gh.auto_pr:
         code, _, _ = await _run_git(cwd, "which", "gh")
