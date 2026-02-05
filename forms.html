@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms Example</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Contact Form</h1>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject">
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            
+            <button type="submit">Send Message</button>
+        </form>
+
+        <h1>Registration Form</h1>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="18" max="120">
+            </div>
+            
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="">Select...</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="terms" required>
+                    I agree to the terms and conditions
+                </label>
+            </div>
+            
+            <button type="submit">Register</button>
+        </form>
+
+        <h1>Survey Form</h1>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label>How did you hear about us?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="source" value="google" checked> Google</label>
+                    <label><input type="radio" name="source" value="facebook"> Facebook</label>
+                    <label><input type="radio" name="source" value="friend"> Friend</label>
+                    <label><input type="radio" name="source" value="other"> Other</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Rate your experience:</label>
+                <div class="rating">
+                    <label><input type="radio" name="rating" value="1"> 1</label>
+                    <label><input type="radio" name="rating" value="2"> 2</label>
+                    <label><input type="radio" name="rating" value="3"> 3</label>
+                    <label><input type="radio" name="rating" value="4"> 4</label>
+                    <label><input type="radio" name="rating" value="5"> 5</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Interests (select all that apply):</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="interests" value="tech"> Technology</label>
+                    <label><input type="checkbox" name="interests" value="sports"> Sports</label>
+                    <label><input type="checkbox" name="interests" value="music"> Music</label>
+                    <label><input type="checkbox" name="interests" value="travel"> Travel</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="comments">Additional Comments:</label>
+                <textarea id="comments" name="comments" rows="4"></textarea>
+            </div>
+            
+            <button type="submit">Submit Survey</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Contact form submitted successfully!');
+            this.reset();
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (this.password.value !== this.confirmPassword.value) {
+                alert('Passwords do not match!');
+                return;
+            }
+            alert('Registration successful!');
+            this.reset();
+        });
+
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Survey submitted successfully!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
